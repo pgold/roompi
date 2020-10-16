@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="joy_dev" default="/dev/input/js0" />
+  <arg name="joy_config" default="8bitdo" />
+  <arg name="teleop_config" default="$(find-pkg-share roompi_bringup)/config/$(var joy_config).yaml" />
+
+  <node pkg="joy_linux" exec="joy_linux_node" name="joy_node">
+    <param name="dev" value="$(var joy_dev)" />
+  </node>
+
+  <node pkg="teleop_twist_joy" exec="teleop_node" name="teleop_twist_joy_node">
+    <param from="$(var teleop_config)" />
+  </node>
+</launch>
