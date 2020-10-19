@@ -8,7 +8,7 @@
     <param name="dev" value="$(var joy_dev)" />
   </node>
 
-  <node pkg="teleop_twist_joy" exec="teleop_node" name="teleop_twist_joy_node">
+  <node pkg="joy_teleop" exec="joy_teleop" name="joy_teleop">
     <param from="$(var teleop_config)" />
   </node>
 </launch>

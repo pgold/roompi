@@ -1,18 +1,16 @@
-teleop_twist_joy_node:
+joy_teleop:
   ros__parameters:
-    axis_linear:
-      x: 1
-    scale_linear:
-      x: 0.3
-    scale_linear_turbo:
-      x: 1.5
-
-    axis_angular:
-      yaw: 0
-    scale_angular:
-      yaw: 0.7
-    scale_angular_turbo:
-      yaw: 3.0
-
-    enable_button: 5  # R shoulder button
-    enable_turbo_button: 4  # L shoulder button
+    piloting:
+      type: topic
+      interface_type: geometry_msgs/msg/Twist
+      topic_name: cmd_vel
+      deadman_buttons: [5]  # R shoulder button
+      axis_mappings:
+        linear-x:
+          axis: 1  # D-Pad vertical axis
+          scale: 0.4
+          offset: 0.0
+        angular-z:
+          axis: 0  # D-Pad horizontal axis
+          scale: 2.5
+          offset: 0.0
