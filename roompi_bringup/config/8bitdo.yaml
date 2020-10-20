@@ -21,3 +21,10 @@ joy_teleop:
       topic_name: dock
       deadman_buttons: [3]  # X button
       message_value: {}
+
+    undock:
+      type: topic
+      interface_type: std_msgs/msg/Empty
+      topic_name: undock
+      deadman_buttons: [2]  # Y button
+      message_value: {}
