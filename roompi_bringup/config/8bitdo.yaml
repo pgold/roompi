@@ -14,3 +14,10 @@ joy_teleop:
           axis: 0  # D-Pad horizontal axis
           scale: 2.5
           offset: 0.0
+
+    dock:
+      type: topic
+      interface_type: std_msgs/msg/Empty
+      topic_name: dock
+      deadman_buttons: [3]  # X button
+      message_value: {}
