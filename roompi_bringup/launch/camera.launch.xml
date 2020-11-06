@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="video_device" default="/dev/video0" />
+
+  <node pkg="v4l2_camera" exec="v4l2_camera_node" name="camera_node">
+    <param name="video_device" value="$(var video_device)" />
+  </node>
+</launch>
