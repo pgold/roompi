@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<launch>
+  <node pkg="image_view" exec="image_view" name="image_view">
+    <remap from="/image/theora" to="/image_raw/theora" />
+    <param name="image_transport" value="theora" />
+    <param name="autosize" value="true" />
+  </node>
+</launch>
