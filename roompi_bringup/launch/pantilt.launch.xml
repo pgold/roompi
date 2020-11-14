@@ -5,4 +5,8 @@
   <node pkg="pwm_pca9685" exec="pca9685_node" name="pca9685_node">
     <param from="$(var pantilt_config)" />
   </node>
+
+  <node pkg="roompi_driver" exec="pantilt" name="pantilt_node">
+    <param from="$(var pantilt_config)" />
+  </node>
 </launch>

@@ -3,6 +3,19 @@ pca9685_node:
     device: /dev/i2c-1
     address: 0x40
     frequency: 50
-    pwm_min: [205, 205, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    pwm_max: [409, 409, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095]
-    timeout_value: [307, 307, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    pwm_min: [167, 110, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    pwm_max: [441, 479, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095]
+    timeout_value: [325, 290, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+pantilt_node:
+  ros__parameters:
+    pan_channel: 1
+    tilt_channel: 0
+    pan_clip_min: -85.0
+    pan_clip_max: 90.0
+    pan_bias: 290
+    pan_scale: 2.1
+    tilt_clip_min: -75.0
+    tilt_clip_max: 55.0
+    tilt_bias: 325
+    tilt_scale: 2.1
