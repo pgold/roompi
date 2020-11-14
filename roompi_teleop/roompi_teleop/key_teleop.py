@@ -94,10 +94,10 @@ class RoompiKeyTeleop(Node):
             self._linear_speed = -self._linear_max_speed
 
         elif key == MainWindow.Key.LEFT:
-            self._angular_speed = -self._angular_max_speed
+            self._angular_speed = self._angular_max_speed
 
         elif key == MainWindow.Key.RIGHT:
-            self._angular_speed = self._angular_max_speed
+            self._angular_speed = -self._angular_max_speed
 
         elif key == MainWindow.Key.LOOK_UP:
             self._tilt_angle += self._pantilt_increment
