@@ -1,10 +1,11 @@
 from enum import Enum
 import curses
 
-from geometry_msgs.msg import Twist
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import qos_profile_system_default
+from geometry_msgs.msg import Twist
+from roompi_interfaces.msg import PanTilt
 
 
 class MainWindow:
@@ -13,6 +14,10 @@ class MainWindow:
         BACKWARD = 2
         LEFT = 3
         RIGHT = 4
+        LOOK_UP = 5
+        LOOK_DOWN = 6
+        LOOK_LEFT = 7
+        LOOK_RIGHT = 8
 
     KEY_MAPPING = {
         # Movement.
@@ -20,6 +25,11 @@ class MainWindow:
         ord("a"): Key.LEFT,
         ord("s"): Key.BACKWARD,
         ord("d"): Key.RIGHT,
+        # Looking.
+        ord("i"): Key.LOOK_UP,
+        ord("j"): Key.LOOK_LEFT,
+        ord("k"): Key.LOOK_DOWN,
+        ord("l"): Key.LOOK_RIGHT,
     }
 
     def __init__(self, stdscr):
@@ -30,6 +40,7 @@ class MainWindow:
         # Initial window state.
         self._stdscr.clear()
         self._stdscr.addstr(0, 0, "Use WASD to move.")
+        self._stdscr.addstr(1, 0, "Use IJKL to look.")
 
     def read_key(self):
         return self.KEY_MAPPING.get(self._stdscr.getch())
@@ -52,12 +63,20 @@ class RoompiKeyTeleop(Node):
         self._angular_max_speed = self.declare_parameter(
             "angular_max_speed", 0.8
         ).value
+        self._pantilt_increment = self.declare_paramenter(
+            "pantilt_increment", 1.0
+        ).value
 
         self._linear_speed = 0.0
         self._angular_speed = 0.0
+        self._pan_angle = 0.0
+        self._tilt_angle = 0.0
 
         self._twist_pub = self.create_publisher(
             Twist, "key_vel", qos_profile_system_default
+        )
+        self._pantilt_pub = self.create_publisher(
+            PanTilt, "pan_tilt", qos_profile_system_default
         )
 
         self.create_timer(1.0 / self._hz, self._refresh)
@@ -80,6 +99,18 @@ class RoompiKeyTeleop(Node):
         elif key == MainWindow.Key.RIGHT:
             self._angular_speed = self._angular_max_speed
 
+        elif key == MainWindow.Key.LOOK_UP:
+            self._tilt_angle += self._pantilt_increment
+
+        elif key == MainWindow.Key.LOOK_DOWN:
+            self._tilt_angle -= self._pantilt_increment
+
+        elif key == MainWindow.Key.LOOK_LEFT:
+            self._pan_angle -= self._pantilt_increment
+
+        elif key == MainWindow.Key.LOOK_RIGHT:
+            self._pan_angle += self._pantilt_increment
+
         elif key is None:
             self._linear_speed = 0.0
             self._angular_speed = 0.0
@@ -89,6 +120,11 @@ class RoompiKeyTeleop(Node):
         twist_msg.linear.x = self._linear_speed
         twist_msg.angular.z = self._angular_speed
         self._twist_pub.publish(twist_msg)
+
+        pantilt_msg = PanTilt()
+        pantilt_msg.pan = self._pan_angle
+        pantilt_msg.tilt = self._tilt_angle
+        self._pantilt_pub.publish(pantilt_msg)
 
 
 def main(stdscr):
