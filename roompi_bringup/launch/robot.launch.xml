@@ -2,5 +2,6 @@
 <launch>
   <include file="$(find-pkg-share roompi_bringup)/launch/joy_teleop.launch.xml" />
   <include file="$(find-pkg-share roompi_bringup)/launch/camera.launch.xml" />
+  <include file="$(find-pkg-share roompi_bringup)/launch/pantilt.launch.xml" />
   <include file="$(find-pkg-share create_bringup)/launch/create_2.launch" />
 </launch>

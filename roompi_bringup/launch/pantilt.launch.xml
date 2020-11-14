@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="pantilt_config" default="$(find-pkg-share roompi_bringup)/config/arducam.yaml" />
+
+  <node pkg="pwm_pca9685" exec="pca9685_node" name="pca9685_node">
+    <param from="$(var pantilt_config)" />
+  </node>
+</launch>
