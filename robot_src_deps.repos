@@ -1,0 +1,25 @@
+repositories:
+  create_robot:
+    type: git
+    url: https://github.com/AutonomyLab/create_robot/
+    version: foxy
+  libcreate:
+    type: git
+    url: https://github.com/AutonomyLab/libcreate
+    version: master
+  roompi:
+    type: git
+    url: https://github.com/pgold/roompi.git
+    version: master
+  ros-pwm-pca9685:
+    type: git
+    url: https://github.com/BrettRD/ros-pwm-pca9685
+    version: eloquent
+  ros2_v4l2_camera:
+    type: git
+    url: https://gitlab.com/boldhearts/ros2_v4l2_camera
+    version: foxy
+  teleop_tools:
+    type: git
+    url: https://github.com/pgold/teleop_tools
+    version: foxy-devel-allow-empty
