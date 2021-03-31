@@ -1,0 +1,45 @@
+joy_teleop:
+  ros__parameters:
+    piloting:
+      type: topic
+      interface_type: geometry_msgs/msg/Twist
+      topic_name: cmd_vel
+      deadman_buttons: [0]  # Left-most switch
+      axis_mappings:
+        linear-x:
+          axis: 1  # Right stick, vertical axis
+          scale: -0.4
+          offset: 0.0
+        angular-z:
+          axis: 0  # Right stick, horizontal axis
+          scale: 2.5
+          offset: 0.0
+
+    pan_tilt:
+      type: topic
+      interface_type: roompi_interfaces/msg/PanTilt
+      topic_name: pan_tilt
+      deadman_buttons: [0]
+      axis_mappings:
+        pan:
+          axis: 3 # Left stick, horizontal axis
+          scale: -100.0
+          offset: 0.0
+        tilt:
+          axis: 2 # Left stick, vertical axis
+          scale: 100.0
+          offset: 0.0
+
+    dock:
+      type: topic
+      interface_type: std_msgs/msg/Empty
+      topic_name: dock
+      deadman_buttons: [5]  # Right 3-position stick, up
+      message_value: {}
+
+    undock:
+      type: topic
+      interface_type: std_msgs/msg/Empty
+      topic_name: undock
+      deadman_buttons: [4]  # Right 3-position stick, down
+      message_value: {}
